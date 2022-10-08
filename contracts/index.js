@@ -5,12 +5,13 @@ const ethers = require("ethers");
 const fs = require("fs");
 const { assert } = require("console");
 const { rlp } = require("ethereumjs-util");
-import * as dotenv from "dotenv";
-dotenv.config();
+// const dotenv = ;
+require("dotenv").config();
 module.exports = utils;
 
 const alchemyGoerliKey = process.env.ALCHEMY_GOERLI_KEY;
 const alchemyMainnetKey = process.env.ALCHEMY_MAINNET_KEY;
+console.log(alchemyGoerliKey, alchemyMainnetKey);
 const alchemyGoerliRpc = "https://eth-goerli.g.alchemy.com/v2/" + alchemyGoerliKey;
 const alchemyMainnetRpc = "https://eth-mainnet.g.alchemy.com/v2/" + alchemyMainnetKey;
 const localRpc = "http://127.0.0.1:8548";
@@ -30,10 +31,12 @@ async function getAccountProofEthers(accountAddress, blockNumber) {
   const contractInstance = new ethers.Contract(goerliAddress, abi, provider);
 
   const blockHash = (await provider.getBlock(blockNumber)).hash;
+  console.log(blockHash);
+
   const rpcProof = await provider.send("eth_getProof", [accountAddress, [], "0x" + blockNumber.toString(16)]);
+  console.log(rpcProof);
 
   const fullAccountProof = await getAccountProof(web3, rpc, contractInstance, accountAddress, blockHash);
-  console.log(blockHash, rpcProof);
   console.log(fullAccountProof);
   const header = JSON.parse(JSON.stringify(fullAccountProof.header)); // Make JS copy hack
 
