@@ -5,14 +5,18 @@ const ethers = require("ethers");
 const fs = require("fs");
 const { assert } = require("console");
 const { rlp } = require("ethereumjs-util");
+import * as dotenv from "dotenv";
+dotenv.config();
 module.exports = utils;
 
-const alchemyGoerliRpc = "https://eth-goerli.g.alchemy.com/v2/DZ-tfEUh76nkrIxPSXIvhaPVAffEUPRd";
-const alchemyMainnetRpc = "https://eth-mainnet.g.alchemy.com/v2/4pnRSHy5RXC-MU61gzArGDuZCylZfOgU";
+const alchemyGoerliKey = process.env.ALCHEMY_GOERLI_KEY;
+const alchemyMainnetKey = process.env.ALCHEMY_MAINNET_KEY;
+const alchemyGoerliRpc = "https://eth-goerli.g.alchemy.com/v2/" + alchemyGoerliKey;
+const alchemyMainnetRpc = "https://eth-mainnet.g.alchemy.com/v2/" + alchemyMainnetKey;
 const localRpc = "http://127.0.0.1:8548";
 const proverAbiPath = "../out/Prover.sol/Prover.json";
 
-const goerliAddress = "0xa8498374E96cD68EEc7F857f4baFd681BEBd1D5b";
+const goerliAddress = "0x121020634959600cDCc6c2C5d9BfbdD26291dE0d";
 const anvilAddress = "0x06b3244b086cecc40f1e5a826f736ded68068a0f";
 
 async function getAccountProofEthers(accountAddress, blockNumber) {
