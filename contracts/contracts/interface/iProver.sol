@@ -9,6 +9,9 @@ interface iProver {
 
     function verifyAccount(
         EthereumDecoder.BlockHeader memory header,
-        MPT.MerkleProof memory accountdata
+        MPT.MerkleProof memory accountdata,
+        uint256 balance,
+        uint256 codeHash,
+        uint256 storageHash
     ) view external returns (bool valid, string memory reason);
 }

@@ -15,20 +15,6 @@ contract Prover is iProver {
 
     function verifyAccount(
         EthereumDecoder.BlockHeader memory header,
-        MPT.MerkleProof memory accountdata
-    )
-        pure public override returns (bool valid, string memory reason)
-    {
-        if (header.stateRoot != accountdata.expectedRoot) return (false, "verifyAccount - different trie roots");
-
-        valid = accountdata.verifyTrieProof();
-        if (!valid) return (false, "verifyAccount - invalid proof");
-
-        return (true, "");
-    }
-
-    function verifyAccount(
-        EthereumDecoder.BlockHeader memory header,
         MPT.MerkleProof memory accountdata,
         uint256 balance,
         uint256 codeHash,
@@ -36,12 +22,18 @@ contract Prover is iProver {
     )
         pure public override returns (bool valid, string memory reason)
     {
+        bytes[] memory accountState = new bytes[](4);
+        accountState[0] = RLPEncode.encodeUint(0);
+        accountState[1] = RLPEncode.encodeUint(balance);
+        accountState[2] = RLPEncode.encodeUint(codeHash);
+        accountState[3] = RLPEncode.encodeUint(storageHash);
+
         if (header.stateRoot != accountdata.expectedRoot) return (false, "verifyAccount - different trie roots");
-        if(RLPEncode.encodeList([0, balance, codeHash, storageHash]) != accountdata.expectedValue) return (false, "verifyAccount - different account data");
+        if(keccak256(RLPEncode.encodeList(accountState)) != keccak256(accountdata.expectedValue)) return (false, "verifyAccount - different account data");
+
 
         valid = accountdata.verifyTrieProof();
         if (!valid) return (false, "verifyAccount - invalid proof");
-
 
         return (true, "");
     }

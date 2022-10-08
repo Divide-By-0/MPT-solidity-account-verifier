@@ -6,7 +6,9 @@ export ETH_RPC_URL=http://localhost:8548
 forge build --force
 export ETH_RPC_URL=https://eth-goerli.g.alchemy.com/v2/DZ-tfEUh76nkrIxPSXIvhaPVAffEUPRd
 forge create --rpc-url $ETH_RPC_URL Prover --constructor-args 0x0000000000000000000000000000000000000000 --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
-# Public anvil sk
+# This is a public Anvil sk
+
+forge create --rpc-url $ETH_RPC_URL Prover --constructor-args 0x0000000000000000000000000000000000000000 --private-key 0x7ad52917a92672e3247c11c34206b99cccaf72f4d68abc3b1f53c964355232ba
 ```
 
 Example alchemy calls
