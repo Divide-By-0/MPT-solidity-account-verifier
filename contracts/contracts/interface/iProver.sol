@@ -11,6 +11,7 @@ interface iProver {
         MPT.MerkleProof memory accountdata,
         uint256 balance,
         uint256 codeHash,
-        uint256 storageHash
+        uint256 storageHash,
+        address contractAddress
     ) view external returns (bool valid, string memory reason);
 }

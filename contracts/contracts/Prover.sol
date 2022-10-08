@@ -17,7 +17,8 @@ contract Prover is iProver {
         MPT.MerkleProof memory accountdata,
         uint256 balance,
         uint256 codeHash,
-        uint256 storageHash
+        uint256 storageHash,
+        address contractAddress
     )
         pure public override returns (bool valid, string memory reason)
     {
@@ -29,8 +30,8 @@ contract Prover is iProver {
 
         if (header.stateRoot != accountdata.expectedRoot) return (false, "verifyAccount - different trie roots");
         if(keccak256(RLPEncode.encodeList(accountState)) != keccak256(accountdata.expectedValue)) return (false, "verifyAccount - different account data");
-
-
+        if(keccak256(contractAddress) != accountdata.key) return (false, "verifyAccount - different contract address");
+        // if(getBlockHash(header) != storedBlockHash) return (false, "verifyAccount - different block hashes");
         valid = accountdata.verifyTrieProof();
         if (!valid) return (false, "verifyAccount - invalid proof");
 

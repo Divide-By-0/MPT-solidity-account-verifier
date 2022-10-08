@@ -50,6 +50,10 @@ async function getAccountProofEthers(accountAddress, blockNumber) {
     utils.buffer2hex(accountState[3])
   );
   console.log(returnValue);
+  // expandkey(web3.utils.soliditySha3(address))
+  // 0x050308000c070b070a0e08010a05080e0b09080d090c07080d0e040a010f0d070f0d090503050f0c0905030e0d020b0e0600020d0a0a0a04010706070301020a
+  // 0x5380c7b7ae81a58eb98d9c78de4a1fd7fd9535fc953ed2be602daaa41767312a
+  // Testing in replit: https://replit.com/@AJGupta/WarmheartedUncommonNlp#contract.sol and https://warmhearteduncommonnlp.ajgupta.repl.co/
 }
 
 const accountAddress = "0x0000000000000000000000000000000000000000"; // the CREATE2 address

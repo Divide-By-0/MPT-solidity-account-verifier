@@ -102,31 +102,31 @@ library EthereumDecoder {
     }
 
     function toBlockHeader(bytes memory rlpHeader) internal pure returns (BlockHeader memory header) {
-
-        RLPDecode.Iterator memory it = RLPDecode.toRlpItem(rlpHeader).iterator();
-
-        uint idx;
-        while(it.hasNext()) {
-            if ( idx == 0 )      header.parentHash       = bytes32(it.next().toUint());
-            else if ( idx == 1 ) header.sha3Uncles       = bytes32(it.next().toUint());
-            else if ( idx == 2 ) header.miner            = it.next().toAddress();
-            else if ( idx == 3 ) header.stateRoot        = bytes32(it.next().toUint());
-            else if ( idx == 4 ) header.transactionsRoot = bytes32(it.next().toUint());
-            else if ( idx == 5 ) header.receiptsRoot     = bytes32(it.next().toUint());
-            else if ( idx == 6 ) header.logsBloom        = it.next().toBytes();
-            else if ( idx == 7 ) header.difficulty       = it.next().toUint();
-            else if ( idx == 8 ) header.number           = it.next().toUint();
-            else if ( idx == 9 ) header.gasLimit         = it.next().toUint();
-            else if ( idx == 10 ) header.gasUsed         = it.next().toUint();
-            else if ( idx == 11 ) header.timestamp       = it.next().toUint();
-            else if ( idx == 12 ) header.extraData       = it.next().toBytes();
-            else if ( idx == 13 ) header.mixHash         = bytes32(it.next().toUint());
-            else if ( idx == 14 ) header.nonce           = uint64(it.next().toUint());
-            // else if ( idx == 13 ) header.nonce           = uint64(it.next().toUint());
-            else it.next();
-            idx++;
+        unchecked {
+            RLPDecode.Iterator memory it = RLPDecode.toRlpItem(rlpHeader).iterator();
+            uint idx;
+            while(it.hasNext()) {
+                if ( idx == 0 )      header.parentHash       = bytes32(it.next().toUint());
+                else if ( idx == 1 ) header.sha3Uncles       = bytes32(it.next().toUint());
+                else if ( idx == 2 ) header.miner            = it.next().toAddress();
+                else if ( idx == 3 ) header.stateRoot        = bytes32(it.next().toUint());
+                else if ( idx == 4 ) header.transactionsRoot = bytes32(it.next().toUint());
+                else if ( idx == 5 ) header.receiptsRoot     = bytes32(it.next().toUint());
+                else if ( idx == 6 ) header.logsBloom        = it.next().toBytes();
+                else if ( idx == 7 ) header.difficulty       = it.next().toUint();
+                else if ( idx == 8 ) header.number           = it.next().toUint();
+                else if ( idx == 9 ) header.gasLimit         = it.next().toUint();
+                else if ( idx == 10 ) header.gasUsed         = it.next().toUint();
+                else if ( idx == 11 ) header.timestamp       = it.next().toUint();
+                else if ( idx == 12 ) header.extraData       = it.next().toBytes();
+                else if ( idx == 13 ) header.mixHash         = bytes32(it.next().toUint());
+                else if ( idx == 14 ) header.nonce           = uint64(it.next().toUint());
+                // else if ( idx == 13 ) header.nonce           = uint64(it.next().toUint());
+                else it.next();
+                idx++;
+            }
+            header.hash = keccak256(rlpHeader);
         }
-        header.hash = keccak256(rlpHeader);
     }
 
     function getBlockHash(EthereumDecoder.BlockHeader memory header) internal pure returns (bytes32 hash) {
