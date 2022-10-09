@@ -1,6 +1,6 @@
 # Ethereum State Bridge
 
-Taken from https://github.com/pipeos-one/goldengate/.
+MPT primitives forked from https://github.com/pipeos-one/goldengate/. Address and balance verification by us (yes that very ugly assembly works!).
 
 ```
 # anvil --fork-url https://eth-mainnet.alchemyapi.io/v2/$ALCHEMY_MAINNET_KEY --port 8548 # Run in tmux
