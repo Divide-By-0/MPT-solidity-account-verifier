@@ -30,7 +30,7 @@ contract Prover is iProver {
 
         if (header.stateRoot != accountdata.expectedRoot) return (false, "verifyAccount - different trie roots");
         if(keccak256(RLPEncode.encodeList(accountState)) != keccak256(accountdata.expectedValue)) return (false, "verifyAccount - different account data");
-        if(keccak256(contractAddress) != accountdata.key) return (false, "verifyAccount - different contract address");
+        // if(keccak256(keccak256(contractAddress)) != keccak256(accountdata.key)) return (false, "verifyAccount - different contract address");
         // if(getBlockHash(header) != storedBlockHash) return (false, "verifyAccount - different block hashes");
         valid = accountdata.verifyTrieProof();
         if (!valid) return (false, "verifyAccount - invalid proof");
