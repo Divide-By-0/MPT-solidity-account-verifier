@@ -17,7 +17,7 @@ const alchemyMainnetRpc = "https://eth-mainnet.g.alchemy.com/v2/" + alchemyMainn
 const localRpc = "http://127.0.0.1:8548";
 const proverAbiPath = "../out/Prover.sol/Prover.json";
 
-const goerliAddress = "0x121020634959600cDCc6c2C5d9BfbdD26291dE0d";
+const goerliAddress = "0x807C0f371638D9140DF60d286F37Bc7b5cF6F8BE";
 const anvilAddress = "0x06b3244b086cecc40f1e5a826f736ded68068a0f";
 
 async function getAccountProofEthers(accountAddress, blockNumber) {
