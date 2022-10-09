@@ -13,5 +13,5 @@ interface iProver {
     uint256 codeHash,
     uint256 storageHash,
     address contractAddress
-  ) external view returns (bool valid, string memory reason);
+  ) external returns (bool valid, string memory reason);
 }
