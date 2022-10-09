@@ -50,7 +50,9 @@ contract Prover is iProver {
   }
 
   function toBlockHeader(bytes memory data) public pure returns (EthereumDecoder.BlockHeader memory header) {
-    return EthereumDecoder.toBlockHeader(data);
+    unchecked {
+      return EthereumDecoder.toBlockHeader(data);
+    }
   }
 
   function toAccount(bytes memory data) public pure returns (EthereumDecoder.Account memory account) {

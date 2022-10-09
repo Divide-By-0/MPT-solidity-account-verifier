@@ -17,7 +17,7 @@ const alchemyMainnetRpc = "https://eth-mainnet.g.alchemy.com/v2/" + alchemyMainn
 const localRpc = "http://127.0.0.1:8548";
 const proverAbiPath = "../out/Prover.sol/Prover.json";
 
-const goerliAddress = "0x807C0f371638D9140DF60d286F37Bc7b5cF6F8BE";
+const goerliAddress = "0x2cAd483492c68E5b14ab7eb2A2b1dD27ADEd40B8";
 const anvilAddress = "0x06b3244b086cecc40f1e5a826f736ded68068a0f";
 
 async function getAccountProofEthers(accountAddress, blockNumber) {
@@ -47,7 +47,8 @@ async function getAccountProofEthers(accountAddress, blockNumber) {
     fullAccountProof,
     utils.buffer2hex(accountState[1]),
     utils.buffer2hex(accountState[2]),
-    utils.buffer2hex(accountState[3])
+    utils.buffer2hex(accountState[3]),
+    accountAddress
   );
   console.log(returnValue);
   // expandkey(web3.utils.soliditySha3(address))
