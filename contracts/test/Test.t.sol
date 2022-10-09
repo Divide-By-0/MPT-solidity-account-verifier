@@ -8,6 +8,7 @@ contract ContractTest is Test {
 
   function setUp() public {}
 
+  // Converts 0x050308000... into 0x5380...
   function removeEveryTwo(bytes memory b) internal returns (bytes memory out) {
     assembly {
       out := mload(0x40)
